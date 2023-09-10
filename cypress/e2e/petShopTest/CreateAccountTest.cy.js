@@ -5,7 +5,7 @@ import Main from "../pageObjects/MainPage";
 describe('User Registration', () => {
     beforeEach(() => {
     
-      cy.visit('https://pet-shop.buckhill.com.hr');
+      cy.visit(Cypress.env('url'));
     });
 
     it('User perform valid registration', () => {
@@ -75,6 +75,21 @@ describe('User Registration', () => {
       reg.marketingAgreementCheck();
       reg.signUpSubmitBtn();
       reg.emailError();
+    })
+    it('User provides invalid email address.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY12345");
+      reg.passwordConfirmInput("QWERTY12345");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.invalidEmailError();
     })
   
   

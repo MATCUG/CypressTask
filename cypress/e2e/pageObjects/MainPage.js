@@ -68,6 +68,10 @@ class Main
     {
         cy.get('div').contains('The password field is required.').should("exist");
     }
+    invalidEmailError()
+    {
+        cy.get('div').contains('The email must be a valid email address.').should("exist");
+    }
 
 }
 

@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:run": "cypress run",
+    "cypress:run:chrome": "cypress run --browser chrome --headless",
+    "cypress:run:chrome:headed": "cypress run --browser chrome --headed"
+
   },
   "author": "Mateusz Cugier",
   "license": "ISC",

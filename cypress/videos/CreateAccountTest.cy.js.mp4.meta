@@ -1,0 +1,31 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/1000
+START=462
+END=5944
+title=User Registration User perform valid registration
+[CHAPTER]
+TIMEBASE=1/1000
+START=9248
+END=11428
+title=User Registration User leaves empty fields
+[CHAPTER]
+TIMEBASE=1/1000
+START=7944
+END=13610
+title=User Registration User leaves first name field empty
+[CHAPTER]
+TIMEBASE=1/1000
+START=14372
+END=19278
+title=User Registration User leaves last name field empty
+[CHAPTER]
+TIMEBASE=1/1000
+START=19351
+END=24186
+title=User Registration User leaves email field empty
+[CHAPTER]
+TIMEBASE=1/1000
+START=23207
+END=29023
+title=User Registration User provides invalid email address.

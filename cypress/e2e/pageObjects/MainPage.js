@@ -1,49 +1,72 @@
 class Main
 {
-
     clickLoginBtn()
     {
-        cy.get("button[class='v-btn v-theme--PetGreen text-white v-btn--density-default v-btn--size-default v-btn--variant-outlined ml-6']").click();
+        cy.get("button").contains('LOGIN').click();
     }
     clickSignUpBtn()
     {
-        cy.get("body > div:nth-child(6) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > span:nth-child(2)").click();
+        cy.get("span").contains("Don't have an account? Sign up").click();
     }
     firstNameInput(firstName)
     {
-        cy.get("#input-33").should("exist").type(firstName);
+        cy.get('div').contains('label', 'First Name').parent().find('input').type(firstName);
     }
     lastNameInput(lastName)
     {
-        cy.get("#input-35").should("exist").type(lastName);
+        cy.get('div').contains('label', 'Last Name').parent().find('input').type(lastName);
     }
     emailAddressInputReg(emailAddress)
     {
-        cy.get("#input-37").should("exist").type(emailAddress);
+        cy.get('div').contains('label', 'Email Address').parent().find('input').type(emailAddress);
     }
     phoneNumberInput(phoneNumber)
     {
-        cy.get("#input-39").should("exist").type(phoneNumber);
+        cy.get('div').contains('label', 'Phone Number').parent().find('input').type(phoneNumber);
     }
     homeAddressInput(homeAddress)
     {
-        cy.get("#input-41").should("exist").type(homeAddress);
+        cy.get('label').contains(/^Address\*$/).parent().find('input').type(homeAddress);
     }
     passwordInputReg(password)
     {
-        cy.get("#input-43").should("exist").type(password);
+        cy.get('div').contains('label', 'Password').parent().find('input').type(password);
     }
     passwordConfirmInput(passwordConfirm)
     {
-        cy.get("#input-45").should("exist").type(passwordConfirm);
+        cy.get('div').contains('label', 'Confirm Password').parent().find('input').type(passwordConfirm);
     }
     marketingAgreementCheck()
     {
-        cy.get("#checkbox-47").should("exist").should("exist").click;
+        cy.get('label').contains('I want to receive inspiration, marketing promotions and updates via email.').click();
     }
-    SignUpSubmitBtn()
+    signUpSubmitBtn()
     {
-        cy.get("button[class='v-btn v-btn--elevated v-theme--PetGreen bg-primary v-btn--density-default v-btn--size-default v-btn--variant-elevated text-white'] span[class='v-btn__content']").should("exist").click;
+        cy.get("span").contains("SIGN UP").click();
+    }
+    firstNameError()
+    {
+        cy.get('div').contains('The first name field is required.').should("exist");
+    }
+    lastNameError()
+    {
+        cy.get('div').contains('The last name field is required.').should("exist");
+    }
+    emailError()
+    {
+        cy.get('div').contains('The email field is required.').should("exist");
+    }
+    phoneNumberError()
+    {
+        cy.get('div').contains('Phone number is required').should("exist");    
+    }
+    AddressError()
+    {
+        cy.get('div').contains('Address is required').should("exist");
+    }
+    passwordError()
+    {
+        cy.get('div').contains('The password field is required.').should("exist");
     }
 
 }

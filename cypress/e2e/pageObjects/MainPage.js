@@ -72,7 +72,20 @@ class Main
     {
         cy.get('div').contains('The email must be a valid email address.').should("exist");
     }
+    confirmPasswordError()
+    {
+        cy.get('div').contains('The password confirmation does not match.').should("exist");
+    }
+    weakPasswordError()
+    {
+        cy.get('div').contains('The password must be at least 8 characters.').should("exist");
+    }
+    noPasswordMatchError()
+    {
+        cy.get('div').contains('The password confirmation does not match.').should("exist");
+    }
 
 }
 
     export default Main;
+   

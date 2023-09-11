@@ -91,6 +91,127 @@ describe('User Registration', () => {
       reg.signUpSubmitBtn();
       reg.invalidEmailError();
     })
+    it('User leaves phone number field empty.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY12345");
+      reg.passwordConfirmInput("QWERTY12345");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.phoneNumberError();
+    })
+    it('User leaves password field empty.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordConfirmInput("QWERTY12345");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.passwordError();
+    })
+    it('User leaves address field empty.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.passwordInputReg("QWERTY12345");
+      reg.passwordConfirmInput("QWERTY12345");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.AddressError();
+    })
+    it('User leave confirm password field empty.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY12345");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.confirmPasswordError();
+    })
+    it('User provides password with less than 8 characters.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY1");
+      reg.passwordConfirmInput("QWERTY1");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.weakPasswordError();
+    })
+    it('User enters a password and a confirmation password that does not match.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY1234");
+      reg.passwordConfirmInput("QWERTY12");
+      reg.marketingAgreementCheck();
+      reg.signUpSubmitBtn();
+      reg.noPasswordMatchError();
+    })
+    it('User enters valid data for all fields except the optional marketing agreement check.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY1234");
+      reg.passwordConfirmInput("QWERTY1234");
+      reg.signUpSubmitBtn();
+    })
+    it('User enters an email address that already exists in the system.', () => {
+      const reg=new Main();
+      reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com").invoke(textToCopy);
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY1234");
+      reg.passwordConfirmInput("QWERTY1234");
+      reg.signUpSubmitBtn();  reg.clickLoginBtn();
+      reg.clickSignUpBtn();
+      reg.firstNameInput("Bartek");
+      reg.lastNameInput("Bartkowski");
+      reg.emailAddressInputReg(textToCopy);
+      reg.phoneNumberInput("222111333");
+      reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
+      reg.passwordInputReg("QWERTY1234");
+      reg.passwordConfirmInput("QWERTY1234");
+      reg.signUpSubmitBtn();
+    })
   
   
   })

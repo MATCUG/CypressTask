@@ -7,11 +7,11 @@
     "cypress:run": "cypress run",
     "cypress:run:chrome": "cypress run --browser chrome --headless",
     "cypress:run:chrome:headed": "cypress run --browser chrome --headed"
-
   },
   "author": "Mateusz Cugier",
   "license": "ISC",
   "dependencies": {
+    "clipboardy": "^3.0.0",
     "cypress": "12.7.0",
     "moment": "^2.29.4"
   },

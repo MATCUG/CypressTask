@@ -1,6 +1,6 @@
 import moment from "moment/moment";
 import Main from "../pageObjects/mainPage";
-import { userDeleteFlow } from "../../support/auth_Utilities";
+import { findUser, getAdminToken } from "../../support/auth_Utilities";
 
 
 describe('User Registration', () => {
@@ -194,11 +194,12 @@ describe('User Registration', () => {
     })
     it('User enters an email address that already exists in the system.', () => {
       const reg=new Main();
+      const usermail = `${Math.random().toString(5).substring(2)}@gmail.com`;
       reg.clickLoginBtn();
       reg.clickSignUpBtn();
       reg.firstNameInput("Bartek");
       reg.lastNameInput("Bartkowski");
-      reg.emailAddressInputReg("222@22.com");
+      reg.emailAddressInputReg(usermail);
       reg.phoneNumberInput("222111333");
       reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
       reg.passwordInputReg("QWERTY1234");
@@ -208,19 +209,32 @@ describe('User Registration', () => {
       reg.clickSignUpBtn();
       reg.firstNameInput("Bartek");
       reg.lastNameInput("Bartkowski");
-      reg.emailAddressInputReg("222@22.com");
+      reg.emailAddressInputReg(usermail);
       reg.phoneNumberInput("222111333");
       reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
       reg.passwordInputReg("QWERTY1234");
       reg.passwordConfirmInput("QWERTY1234");
       reg.signUpSubmitBtn();
-      cy.then(() => {
-      userDeleteFlow();
+      cy.then(async () => {
+      // userDeleteFlow();
+      const token = await getAdminToken();
+      const uuid = await findUser(usermail)
+        cy.request({
+          method: 'DELETE',
+          url: `https://pet-shop.buckhill.com.hr/api/v1/admin/user-delete/${uuid}`,
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          form: true, // Set this to send the request as form data
+    
+        }).then((response) => {
+          expect(response.status).to.eq(200)
+        })
       })
      
-    
+    })
   })
-})
+
   
 
   

@@ -1,61 +1,35 @@
-let authToken = null;
-let id = null;
+
   
-    const getAdminToken = () => {
-      cy.get({
+    const getAdminToken = async() => {
+      const adminData = {
+        email: 'admin@buckhill.co.uk',
+        password: 'admin'
+      }
+      const reqBody = Object.keys(adminData).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(adminData[key])).join('&');
+
+      const res = await fetch("https://pet-shop.buckhill.com.hr/api/v1/admin/login", {
         method: 'POST',
-        url: 'https://pet-shop.buckhill.com.hr/api/v1/admin/login',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        form: true, 
-        body: {
-          email: 'admin@buckhill.co.uk',
-          password: 'admin'
-        }
-      }).then((response) => {
-        authToken = response.body.token;
-      });
+        body: reqBody
+      }).then (res => res.json())
+      console.log('GETADMIN TOKEN',res)
+      return await res.data.token
     };
-    const findUser = (mail) => {
-      cy.get({
+    const findUser = async (mail) => {
+      const token = await getAdminToken();
+      const res = await fetch(`https://pet-shop.buckhill.com.hr/api/v1/admin/user-listing?email=${mail}`, {
         method: 'GET',
-        url: 'https://pet-shop.buckhill.com.hr/api/v1/admin/user-listing?email='+mail,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer '+authToken
+          'Authorization': `Bearer ${token}`
         },
-        form: true, // Set this to send the request as form data
-        body: {
-          email: mail
-        }
-      }).then((response) => {
-        id = response.body.uuid;
-      });
+      }).then (res => res.json())
+      console.log('FIND USER',res)
+      return await res.data[0].uuid;
     };
-    const deleteUser = () => {
-      cy.get({
-        method: 'POST',
-        url: 'https://pet-shop.buckhill.com.hr/api/v1/admin/user-delete/:uuid',
-        headers: {
-          'Authorization': 'Bearer '+authToken
-        },
-        form: true, // Set this to send the request as form data
-        body: {
-          uuid: id
-        }
-      }).then((response) => {
-        id = response.body.uuid;
-      });
-    };
-    const userDeleteFlow = async() => {
-      await getAdminToken();
-      await findUser("2@2.com");
-      await deleteUser();
-    };
-
-
-
-    export {userDeleteFlow}
+  
+    export {getAdminToken, findUser}
    
     

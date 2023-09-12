@@ -1,5 +1,6 @@
 import moment from "moment/moment";
-import Main from "../pageObjects/MainPage";
+import Main from "../pageObjects/mainPage";
+import { userDeleteFlow } from "../../support/auth_Utilities";
 
 
 describe('User Registration', () => {
@@ -10,6 +11,7 @@ describe('User Registration', () => {
 
     it('User perform valid registration', () => {
       const reg=new Main();
+      
       reg.clickLoginBtn();
       reg.clickSignUpBtn();
       reg.firstNameInput("Bartek");
@@ -183,7 +185,7 @@ describe('User Registration', () => {
       reg.clickSignUpBtn();
       reg.firstNameInput("Bartek");
       reg.lastNameInput("Bartkowski");
-      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com");
+      reg.emailAddressInputReg(Math.random().toString(5).substring(2)+ "@gmail.com");
       reg.phoneNumberInput("222111333");
       reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
       reg.passwordInputReg("QWERTY1234");
@@ -196,22 +198,30 @@ describe('User Registration', () => {
       reg.clickSignUpBtn();
       reg.firstNameInput("Bartek");
       reg.lastNameInput("Bartkowski");
-      reg.emailAddressInputReg("Qwerty" + moment().format("hmmss") + "@gmail.com").invoke(textToCopy);
+      reg.emailAddressInputReg("222@22.com");
       reg.phoneNumberInput("222111333");
       reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
       reg.passwordInputReg("QWERTY1234");
       reg.passwordConfirmInput("QWERTY1234");
-      reg.signUpSubmitBtn();  reg.clickLoginBtn();
+      reg.signUpSubmitBtn();  
+      reg.clickLoginBtn();
       reg.clickSignUpBtn();
       reg.firstNameInput("Bartek");
       reg.lastNameInput("Bartkowski");
-      reg.emailAddressInputReg(textToCopy);
+      reg.emailAddressInputReg("222@22.com");
       reg.phoneNumberInput("222111333");
       reg.homeAddressInput("Brzozowa 22 61-460 Warszawa");
       reg.passwordInputReg("QWERTY1234");
       reg.passwordConfirmInput("QWERTY1234");
       reg.signUpSubmitBtn();
-    })
-  
-  
+      cy.then(() => {
+      userDeleteFlow();
+      })
+     
+    
   })
+})
+  
+
+  
+  

@@ -216,7 +216,6 @@ describe('User Registration', () => {
       reg.passwordConfirmInput("QWERTY1234");
       reg.signUpSubmitBtn();
       cy.then(async () => {
-      // userDeleteFlow();
       const token = await getAdminToken();
       const uuid = await findUser(usermail)
         cy.request({
@@ -225,7 +224,7 @@ describe('User Registration', () => {
           headers: {
             'Authorization': `Bearer ${token}`
           },
-          form: true, // Set this to send the request as form data
+          form: true, 
     
         }).then((response) => {
           expect(response.status).to.eq(200)

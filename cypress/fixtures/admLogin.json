@@ -1,0 +1,25 @@
+
+[
+{
+"login": "admin@buckhill.co.uk",
+"password": "admin",
+"expected": "Dashboard"
+
+},
+{
+"login": "qwe",
+"password": "admin",
+"expected": "//p[@class='text-red text-center login__error-message']"
+},
+{
+    "login": "admin@buckhill.co.uk",
+    "password": "qwe",
+    "expected": "//p[@class='text-red text-center login__error-message']"
+},
+{
+    "login": " ",
+    "password": " ",
+    "expected": "//p[@class='text-red text-center login__error-message']"
+}
+
+]
